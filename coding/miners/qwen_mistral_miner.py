@@ -76,7 +76,7 @@ def miner_init(self):
 
     self.model = model_factory(chat=True)
     self.mistral = model_factory(
-        api_base="http://localhost:8001/v1",
+        api_base="http://localhost:8002/v1",
         model_name="thesven/Mistral-7B-Instruct-v0.3-GPTQ",
         chat=True,
     )
