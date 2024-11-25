@@ -1,9 +1,9 @@
 import random
 from typing import Callable, List, Dict
 
-
 from .task import Task
 from coding.schemas import Context
+from coding.helpers.rewrite import rewrite_code
 
 def make_hole(text, chunk_size=5):
     lines = text.splitlines()
@@ -40,7 +40,7 @@ class FillInMiddleTask(Task):
     
     def __init__(self, llm: Callable, context: Context, **kwargs):
         self.context = context
-
+        context.content = rewrite_code(context.content, llm)
         fim_query, hole = make_hole(context.content)
         self.query = (
             fim_query

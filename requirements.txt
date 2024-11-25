@@ -1,9 +1,10 @@
-bittensor==7.1.2
+langchain==0.3.7
+bittensor==8.3.1
 langchain-openai
 sentence_transformers
 numpy
 datasets
-langchain
+langchain-core==0.3.19
 python-dotenv
 code_bert_score
 cachetools
@@ -14,3 +15,4 @@ swebench
 autopep8
 boto3
 smart_open
+pydantic==2.9.2

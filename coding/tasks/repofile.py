@@ -2,7 +2,7 @@ from typing import Callable, List, Dict
 
 from .task import Task
 from coding.schemas import Context, File
-
+from coding.helpers.rewrite import rewrite_code
 class RepoFileTask(Task):
     name: str = "repofile"
     desc: str = "repository level file creation"
@@ -26,6 +26,9 @@ class RepoFileTask(Task):
         self.query = (
             "write code to" + llm.invoke(f'Summarize what is happening in this python module: {context.content}').content
         )
+        # rewrite every file
+        for file in context.extras['sibling_docs']:
+            file.content = rewrite_code(file.content, llm)
         self.files = [File(path=cont.title, content=cont.content) for cont in context.extras['sibling_docs']] # Filter the info sent to the miners
         self.reference = context.content
 

@@ -5,6 +5,7 @@ from typing import Callable, List, Dict
 from .task import Task
 from coding.schemas import Context
 from coding.helpers.fim import insert_fim_hole
+from coding.helpers.rewrite import rewrite_code
 
 def extract_random_function(code):
     """
@@ -62,7 +63,8 @@ class CompletionTask(Task):
     
     def __init__(self, llm: Callable, context: Context, **kwargs):
         self.context = context
-
+        context.content = rewrite_code(context.content, llm)
+        
         func_signature, func_body = extract_random_function(context.content) # TODO handle comments
         if func_signature is None or func_body is None:
             self.query, self.reference = insert_fim_hole(context.content)

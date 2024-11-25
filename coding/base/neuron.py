@@ -15,8 +15,9 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-import copy
 import sys
+import copy
+import json
 
 import bittensor as bt
 
@@ -91,7 +92,7 @@ class BaseNeuron(ABC):
         bt.logging.info(f"Wallet: {self.wallet}")
         bt.logging.info(f"Subtensor: {self.subtensor}")
         bt.logging.info(f"Metagraph: {self.metagraph}")
-
+        
         # Check if the miner is registered on the Bittensor network before proceeding further.
         self.check_registered()
 
@@ -130,16 +131,21 @@ class BaseNeuron(ABC):
 
     def check_registered(self):
         # --- Check for registration.
-        if not self.subtensor.is_hotkey_registered(
-            netuid=self.config.netuid,
-            hotkey_ss58=self.wallet.hotkey.ss58_address,
-        ):
+        try:
+            if not self.subtensor.is_hotkey_registered(
+                netuid=self.config.netuid,
+                hotkey_ss58=self.wallet.hotkey.ss58_address,
+            ):
+                bt.logging.error(
+                    f"Wallet: {self.wallet} is not registered on netuid {self.config.netuid}."
+                    f" Please register the hotkey using `btcli subnets register` before trying again"
+                )
+                sys.exit()
+        except json.decoder.JSONDecodeError:
             bt.logging.error(
-                f"Wallet: {self.wallet} is not registered on netuid {self.config.netuid}."
-                f" Please register the hotkey using `btcli subnets register` before trying again"
+                f"JSONDecodeError encountered while checking registration for wallet: {self.wallet} on netuid {self.config.netuid}."
             )
-            sys.exit()
-
+            # Handle the error or continue without exiting
     def should_sync_metagraph(self):
         """
         Check if enough epoch blocks have elapsed since the last checkpoint to sync.

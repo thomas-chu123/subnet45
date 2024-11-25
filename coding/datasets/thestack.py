@@ -615,7 +615,7 @@ class TheStackDataset(Dataset):
             "Python",
             "JavaScript",
             # "TypeScript",
-            # "Go",
+            "Go",
             # "Java",
             "C++",
             # "C",
@@ -634,6 +634,7 @@ class TheStackDataset(Dataset):
         for dataset in datasets:
             dataset = dataset.shuffle()
         self.stack_dataset = interleave_datasets(datasets)
+        self.stack_dataset = self.stack_dataset.shuffle()
         self.stack_dataset = self.stack_dataset.map(lambda row: process_row(row))
         self.stack_iterset = iter(self.stack_dataset)
 

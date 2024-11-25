@@ -37,6 +37,7 @@ python3 --version
 
 If the above doesnt return `python3.11` try using the command `python3.11` instead. If the cmd `python3.11` works, use that in place of every python command below. 
 
+YOU WILL GET SOME ERRORS ABOUT THE PYTHON VERSION, IGNORE THEM.
 
 After ensuring you have python run the following commands:
 ```bash
@@ -44,8 +45,8 @@ git clone https://github.com/brokespace/code
 cd code
 python3 -m venv .venv
 source .venv/bin/activate
-python3 -m pip install -r requirements.txt
-python3 -m pip install -e .
+python3 -m pip install --use-deprecated=legacy-resolver -r requirements.txt
+python3 -m pip install --use-deprecated=legacy-resolver -e .
 python3 -m pip uninstall uvloop # b/c it causes issues with threading/loops
 ```
 

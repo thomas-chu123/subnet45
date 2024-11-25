@@ -7,7 +7,7 @@ This repository requires python3.9 or higher. To install it, simply clone this r
 ```bash
 git clone https://github.com/brokespace/code
 cd code
-python -m pip install -r requirements.txt
+python -m pip install --use-deprecated=legacy-resolver -r requirements.txt
 python -m pip install -e .
 python -m pip uninstall uvloop # b/c it causes issues with threading/loops
 ```

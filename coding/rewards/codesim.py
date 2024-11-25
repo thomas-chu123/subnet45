@@ -48,6 +48,8 @@ class CodeSimModel(BaseRewardModel):
 
         # Place the normalized scores back in their original positions
         for idx, score in zip(indices, scores):
+            if score > 1:
+                score = 1.0
             result_scores[idx] = normalize_cosim(score)
 
         return result_scores

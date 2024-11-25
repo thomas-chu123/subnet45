@@ -5,6 +5,7 @@ from typing import Callable, List, Dict
 from .task import Task
 from coding.schemas import Context, File
 from coding.helpers.fim import insert_fim_hole
+from coding.helpers.rewrite import rewrite_code
 
 def delete_function_body_and_following(code: str) -> (str, str):
     """
@@ -89,6 +90,7 @@ class RepoCompletionTask(Task):
 
     def __init__(self, llm: Callable, context: Context, **kwargs):
         self.context = context
+        context.content = rewrite_code(context.content, llm)
 
         if context.topic == "Python":
             mod_code, correct_body = delete_function_body_and_following(context.content)
@@ -99,6 +101,9 @@ class RepoCompletionTask(Task):
                 self.query, self.reference = insert_fim_hole(context.content)
         else:
             self.query, self.reference = insert_fim_hole(context.content)
+        # rewrite every file
+        for file in context.extras['sibling_docs']:
+            file.content = rewrite_code(file.content, llm)
         self.files = [File(path=cont.title, content=cont.content) for cont in context.extras['sibling_docs']] # Filter the info sent to the miners
 
         self.topic = context.title

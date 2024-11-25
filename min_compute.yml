@@ -24,7 +24,7 @@ compute_spec:
       required: True                       # Does the application require a GPU?
       min_vram: 24                          # Minimum GPU VRAM (GB)
       recommended_vram: 48                 # Recommended GPU VRAM (GB)
-      recommended_gpu: "NVIDIA 3090"       # provide a recommended GPU to purchase/rent
+      recommended_gpu: "2x NVIDIA 3090"       # provide a recommended GPU to purchase/rent
 
     memory:
       min_ram: 16          # Minimum RAM (GB)
@@ -55,8 +55,8 @@ compute_spec:
     gpu:
       required: True                       # Does the application require a GPU?
       min_vram: 16                          # Minimum GPU VRAM (GB)
-      recommended_vram: 32                 # Recommended GPU VRAM (GB)
-      recommended_gpu: "NVIDIA 3090"       # provide a recommended GPU to purchase/rent
+      recommended_vram: 48                 # Recommended GPU VRAM (GB)
+      recommended_gpu: "2x NVIDIA 3090"       # provide a recommended GPU to purchase/rent
 
     memory:
       min_ram: 16          # Minimum RAM (GB)
