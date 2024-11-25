@@ -1,0 +1,1 @@
+btcli subnet metagraph --subtensor.network test --netuid 171

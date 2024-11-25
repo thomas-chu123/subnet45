@@ -121,6 +121,16 @@ class BaseMinerNeuron(BaseNeuron):
                     if self.should_exit:
                         break
 
+                if self.block % 10 == 0:
+                    bt.logging.info(
+                        f"Block: {self.block} | "
+                        f"Stake: {self.metagraph.S[self.uid]:.4f} | "
+                        f"Trust: {self.metagraph.T[self.uid]:.4f} | "
+                        f"Consensus: {self.metagraph.C[self.uid]:.6f} | "
+                        f"Incentive: {self.metagraph.I[self.uid]:.6f} | "
+                        f"Emission: {self.metagraph.E[self.uid]:.6f} | "
+                    )
+
                 # Sync metagraph and potentially set weights.
                 self.sync()
                 self.step += 1

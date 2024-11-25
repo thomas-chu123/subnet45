@@ -1,0 +1,1 @@
+btcli wallet overview --subtensor.network test --wallet.name test --wallet.hotkey default
