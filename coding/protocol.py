@@ -28,40 +28,40 @@ from starlette.responses import StreamingResponse
 
 from coding.schemas import ChatMessage, File
 
-# class CodeSynapse(bt.Synapse):
-#     """
-#     """
+class CodeSynapse(bt.Synapse):
+    """
+    """
 
-#     class Config:
-#         """
-#         Pydantic model configuration class for CodeSynapse. This class sets validation of attribute assignment as True.
-#         validate_assignment set to True means the pydantic model will validate attribute assignments on the class.
-#         """
+    class Config:
+        """
+        Pydantic model configuration class for CodeSynapse. This class sets validation of attribute assignment as True.
+        validate_assignment set to True means the pydantic model will validate attribute assignments on the class.
+        """
 
-#         validate_assignment = True
+        validate_assignment = True
 
-#     def deserialize(self) -> "CodeSynapse":
-#         """
-#         """
-#         return self
+    def deserialize(self) -> "CodeSynapse":
+        """
+        """
+        return self
 
-#     query: str = pydantic.Field(
-#         "",
-#         title="query",
-#         description="The query",
-#     )
+    query: str = pydantic.Field(
+        "",
+        title="query",
+        description="The query",
+    )
     
-#     attachments: List[Any] = pydantic.Field(
-#         [],
-#         title="attachments",
-#         description="Attachments to be sent alongside the query",
-#     )
+    attachments: List[Any] = pydantic.Field(
+        [],
+        title="attachments",
+        description="Attachments to be sent alongside the query",
+    )
 
-#     completion: str = pydantic.Field(
-#         "",
-#         title="Completion",
-#         description="Completion status of the current CodeSynapse object. This attribute is mutable and can be updated.",
-#     )
+    completion: str = pydantic.Field(
+        "",
+        title="Completion",
+        description="Completion status of the current CodeSynapse object. This attribute is mutable and can be updated.",
+    )
 
 
 
