@@ -126,13 +126,13 @@ class Miner(BaseMinerNeuron):
                 )
                 return True, "Unrecognized hotkey"
 
-            if self.config.blacklist.force_validator_permit:
-                # If the config is set to force validator permit, then we should only allow requests from validators.
-                if not self.metagraph.validator_permit[uid]:
-                    bt.logging.warning(
-                        f"Blacklisting a request from non-validator hotkey {synapse.dendrite.hotkey}"
-                    )
-                    return True, "Non-validator hotkey"
+            # if self.config.blacklist.force_validator_permit:
+            #     # If the config is set to force validator permit, then we should only allow requests from validators.
+            #     if not self.metagraph.validator_permit[uid]:
+            #         bt.logging.warning(
+            #             f"Blacklisting a request from non-validator hotkey {synapse.dendrite.hotkey}"
+            #         )
+            #         return True, "Non-validator hotkey"
 
             bt.logging.trace(
                 f"Not Blacklisting recognized hotkey {synapse.dendrite.hotkey}"
